@@ -59,13 +59,10 @@ add_executable(unit_tests unit_tests.cpp)
 
 target_link_libraries(unit_tests
     example_boost_unit_test
-    Boost::unit_test_framework
+    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
 )
 
-target_compile_definitions(unit_tests
-    PRIVATE
-        BOOST_TEST_DYN_LINK
-)
+add_definitions (-DBOOST_TEST_DYN_LINK)
 ----
 
 In the above code, a unit test binary is added, which links against the boost unit-test-framework
@@ -121,6 +118,15 @@ Scanning dependencies of target unit_tests
 Linking CXX executable unit_tests
 [100%] Built target unit_tests
 
+$ make test
+Running tests...
+Test project /home/matrim/workspace/cmake-examples/05-unit-testing/boost/build
+    Start 1: test_all
+1/1 Test #1: test_all .........................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.01 sec
 $ make test
 Running tests...
 Test project /home/matrim/workspace/cmake-examples/05-unit-testing/boost/build

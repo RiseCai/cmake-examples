@@ -17,8 +17,7 @@ $ tree
 ├── cmake-examples.conf
 ├── CMakeLists.txt
 ├── include
-│   └── installing
-│       └── Hello.h
+│   └── Hello.h
 ├── README.adoc
 └── src
     ├── Hello.cpp
@@ -27,7 +26,7 @@ $ tree
 
   * link:CMakeLists.txt[] - Contains the CMake commands you wish to run
   * link:cmake-examples.conf[] - An example configuration file
-  * link:include/installing/Hello.h[] - The header file to include
+  * link:include/Hello.h[] - The header file to include
   * link:src/Hello.cpp[] - A source file to compile
   * link:src/main.cpp[] - The source file with main
 
@@ -72,16 +71,6 @@ install (TARGETS cmake_examples_inst
     RUNTIME DESTINATION bin)
 ----
 ====
-
-
-[source,cmake]
-----
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/ 
-    DESTINATION include)
-----
-
-Install the header files for developing against the +cmake_examples_inst+ library
-into the +${CMAKE_INSTALL_PREFIX}/include+ directory.
 
 [source,cmake]
 ----
@@ -176,7 +165,7 @@ Extra Notes
 Overriding the default install location
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As mentioned the default install location is set from the +CMAKE_INSTALL_PREFIX+,
+As mentioned the default install location is set from the +CMAKE_INSTALL_PERFIX+,
 which defaults to `/usr/local/`
 
 If you want to change this default location for all users you can add the

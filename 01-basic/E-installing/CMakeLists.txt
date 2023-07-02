@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.0)
 
 project(cmake_examples_install)
 
@@ -6,29 +6,34 @@ project(cmake_examples_install)
 # Create a library
 ############################################################
 
-#Generate the shared library from the library sources
-add_library(cmake_examples_inst SHARED
+# Source files to be used in the library
+set(library_SOURCES
     src/Hello.cpp
 )
 
+#Generate the shared library from the library sources
+add_library(cmake_examples_inst SHARED ${library_SOURCES})
+
+
 target_include_directories(cmake_examples_inst
-    PUBLIC 
-        ${PROJECT_SOURCE_DIR}/include
+    PUBLIC ${PROJECT_SOURCE_DIR}/include
 )
 
 ############################################################
 # Create an executable
 ############################################################
 
-# Add an executable with the above sources
-add_executable(cmake_examples_inst_bin
+# Source fles for the binary
+set(binary_SOURCES
     src/main.cpp
 )
 
+# Add an executable with the above sources
+add_executable(cmake_examples_inst_bin ${binary_SOURCES})
+
 # link the new hello_library target with the hello_binary target
 target_link_libraries( cmake_examples_inst_bin
-    PRIVATE 
-        cmake_examples_inst
+    PRIVATE cmake_examples_inst
 )
 
 ############################################################
@@ -44,9 +49,6 @@ install (TARGETS cmake_examples_inst_bin
 install (TARGETS cmake_examples_inst
     LIBRARY DESTINATION lib)
 
-# Header files
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/ 
-    DESTINATION include)
 
 # Config
 install (FILES cmake-examples.conf

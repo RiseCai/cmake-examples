@@ -1,4 +1,4 @@
-#include "installing/Hello.h"
+#include "Hello.h"
 
 int main(int argc, char *argv[])
 {

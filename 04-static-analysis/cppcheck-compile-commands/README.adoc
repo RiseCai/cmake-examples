@@ -37,7 +37,7 @@ $ tree
   * link:CMakeLists.txt[] - Top level CMakeLists.txt
   * link:cmake/modules/FindCppCheck.cmake[] - A custom package module to find CppCheck
   * link:subproject1/CMakeLists.txt[] - CMake commands for subproject 1
-  * link:subproject1/main1.cpp[] - source for a subproject with no errors
+  * link:subproject1/main.cpp[] - source for a subproject with no errors
   * link:subproject2/CMakeLists.txt[] - CMake commands for subproject 2
   * link:subproject2/main2.cpp[] - source for a subproject that includes errors
 
@@ -61,7 +61,7 @@ $ wget https://github.com/danmar/cppcheck/archive/1.79.tar.gz \
 
 ## Adding Custom Package Modules
 
-As with the previous example I use a custom module to find CppCheck. This version is slightly different to the previous one and 
+As with the previous example I use a custom module to find CppCheck. This version is slightly different to the pervious one and 
 will automatically add a `make cppcheck-analysis` target.
 
 [source,cmake]
@@ -87,18 +87,6 @@ Adding a suppression file called `.cppcheck-suppressions` which must be in your 
 When cppcheck finds an error it can cause it to exit with a specific error. In this 
 example, by default, it will exit with `1`. To change this you can set the 
 +CPPCHECK_ERROR_EXITCODE_ARG+ argument when running CMake.
-
-### Exitcode suppressions
-
-Sometimes you wish to display an error in the log, but to not have that error cause a failed build. To do this you can create a file `.cppcheck_exitcode_suppressions` and add suppressions to it. This file must be in your +CMAKE_SOURCE_DIR+
-
-### CppCheck arguments
-
-The default enabled checks are `--enabled=warning`. To change this you can override the `CPPCHECK_CHECK_ARGS` variable before calling `find(cppcheck)`.
-
-### Excluding files / folders
-
-Many projects include some vendored 3rd party code. To exclude this from you check you can create a list `CPPCHECK_EXCLUDES` before calling the find module. This will add all files and folders in the list into the list of excluded folders.
 
 ### CppCheck build dir
 

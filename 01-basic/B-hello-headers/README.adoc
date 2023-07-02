@@ -33,7 +33,7 @@ B-hello-headers$ tree
 
 ## Directory Paths
 
-CMake syntax specifies a number of https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/Useful-Variables[variables]
+CMake syntax specifies a number of https://cmake.org/Wiki/CMake_Useful_Variables[variables]
 which can be used to help find useful directories in your project or source tree.
 Some of these include:
 
@@ -83,16 +83,6 @@ file(GLOB SOURCES "src/*.cpp")
 ----
 ====
 
-
-[TIP]
-====
-For modern CMake it is NOT recommended to use a variable for sources. Instead it is 
-typical to directly declare the sources in the add_xxx function.
-
-This is particularly important for glob commands which may not always show you the
-correct results if you add a new source file.
-====
-
 ## Including Directories
 
 When you have different include folders, you can make your compiler aware of them using the
@@ -101,12 +91,11 @@ When you have different include folders, you can make your compiler aware of the
 [source,cmake]
 ----
 target_include_directories(target
-    PRIVATE 
-        ${PROJECT_SOURCE_DIR}/include
-)
+    PRIVATE ${PROJECT_SOURCE_DIR}/include
+    )
 ----
 
-The +PRIVATE+ identifier specifies the scope of the include. This is important for libraries and is explained in the next example. More details on the function is available link:https://cmake.org/cmake/help/v3.0/command/target_include_directories.html[here]
+The +PRIVATE+ identifier specifies the scope of the include. This is important for libraries and is exlpained in the next example. More details on the function is available link:https://cmake.org/cmake/help/v3.0/command/target_include_directories.html[here]
 
 # Building the Example
 

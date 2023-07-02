@@ -1,6 +1,10 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.0)
 
 project(cmake_examples_deb)
+
+include_directories(
+    ${PROJECT_SOURCE_DIR}/include
+    )
 
 # set a project version
 set (deb_example_VERSION_MAJOR 0)
@@ -13,24 +17,30 @@ set (deb_example_VERSION "${deb_example_VERSION_MAJOR}.${deb_example_VERSION_MIN
 # Create a library
 ############################################################
 
-#Generate the shared library from the library sources
-add_library(cmake_examples_deb SHARED src/Hello.cpp)
-
-target_include_directories(cmake_examples_deb
-    PUBLIC
-        ${PROJECT_SOURCE_DIR}/include
+# Source files to be used in the library
+set(library_SOURCES
+    src/Hello.cpp
 )
+
+#Generate the shared library from the library sources
+add_library(cmake_examples_deb SHARED ${library_SOURCES})
+
 ############################################################
 # Create an executable
 ############################################################
 
+# Source fles for the binary
+set(binary_SOURCES
+    src/main.cpp
+)
+
 # Add an executable with the above sources
-add_executable(cmake_examples_deb_bin src/main.cpp)
+add_executable(cmake_examples_deb_bin ${binary_SOURCES})
 
 # link the new hello_library target with the hello_binary target
 target_link_libraries( cmake_examples_deb_bin
     PUBLIC
-        cmake_examples_deb
+    cmake_examples_deb
 )
 
 ############################################################

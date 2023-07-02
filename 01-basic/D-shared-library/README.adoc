@@ -17,15 +17,14 @@ $ tree
 .
 ├── CMakeLists.txt
 ├── include
-│   └── shared
-│       └── Hello.h
+│   └── Hello.h
 └── src
     ├── Hello.cpp
     └── main.cpp
 ```
 
   * link:CMakeLists.txt[] - Contains the CMake commands you wish to run
-  * link:include/shared/Hello.h[] - The header file to include
+  * link:include/Hello.h[] - The header file to include
   * link:src/Hello.cpp[] - A source file to compile
   * link:src/main.cpp[] - The source file with main
 
@@ -40,13 +39,15 @@ This is called as follows:
 
 [source,cmake]
 ----
-add_library(hello_library SHARED
+set(library_SOURCES
     src/Hello.cpp
 )
+
+add_library(hello_library SHARED ${library_SOURCES})
 ----
 
 This will be used to create a shared library with the name libhello_library.so with
-the sources passed to the +add_library()+ function.
+the sources from the +library_SOURCES+ variable.
 
 ## Alias Target
 
@@ -66,13 +67,10 @@ executable use the the +target_link_library()+ function to point to your library
 
 [source,cmake]
 ----
-add_executable(hello_binary
-    src/main.cpp
-)
+add_executable(hello_binary ${binary_SOURCES})
 
-target_link_libraries(hello_binary
-    PRIVATE
-        hello::library
+target_link_libraries( hello_binary
+    hello::library
 )
 ----
 
